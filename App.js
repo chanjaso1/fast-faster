@@ -51,4 +51,4 @@ const Tab = createBottomTabNavigator();
 
  }
 
-export default Navigator
+export default Navigator 
