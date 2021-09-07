@@ -1,22 +1,32 @@
-import React, { useState } from 'react'; 
+import React, { useEffect, useState } from 'react'; 
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Modal} from 'react-native';
+import { View, StyleSheet, Modal, Text} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
-import FlatButton from '../../../shared/Button';
+import FlatButton from '../../../components/Button';
 import ModalStyle from '../../styles/ModalStyle'; 
-import SetFastTime, {ChangeFastTime} from '../../../shared/PopUp';
+import SetFastTime, {ChangeFastTime} from '../../../components/PopUp';
+import Timer from '../../../components/Timer';
+  
+  
 
 export default function fastingScreen() {
-    const [value, setValue] = useState(50);
+    const [mounted, setMounted] = useState(true);
+    const [progress, setProgress] = useState(50);
+    const [timer, turnTimerOn] = useState(true);
+    
+
     const [visible, setVisible] = useState(false);
     const [modalContent, setModalContent] = useState('');
 
+
+
     return (
         <View style={style.container}>
+            {timer == true ? <Timer hours='1' isMounted={mounted}/> : null}
             <CircularProgress style={style.circle}
                 radius={150}
-                value={value % 101}
+                value={progress % 101}
                 textColor='#222'
                 fontSize={20}
                 valueSuffix={"%"}
@@ -37,7 +47,13 @@ export default function fastingScreen() {
                     </View> 
                 </View>
             </Modal>
-            <FlatButton text="Start" onPress={() => {setVisible(true); setModalContent('SetFastTime'); }}  />
+            {/* <FlatButton text="Start" onPress={() => {setVisible(true); setModalContent('SetFastTime'); }}  /> */}
+            <FlatButton text="Start" onPress={() => {
+                turnTimerOn(timerOn => !timerOn)
+                setMounted(mounted => !mounted);
+                setModalContent("SetFastTime");
+                setVisible(true);
+                }}  />
             
             
             
@@ -81,5 +97,16 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'left'
-    }
+    },
+    label : {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.75)'
+    },
+
+    timerLabel : {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.5)'
+    },
 })

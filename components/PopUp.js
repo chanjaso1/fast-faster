@@ -1,9 +1,8 @@
-import { Modal } from "react-native";
-import React, { useEffect } from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, View, Text } from "react-native";
 import ModalStyle from "../src/styles/ModalStyle";
-import FlatButton from "./Button";
-
+// import DateTimePicker from '@react-native-community/datetimepicker';
+// import DatePicker from 'react-native-date-picker'
 
 const style = StyleSheet.create({
     container:{
@@ -16,9 +15,11 @@ const style = StyleSheet.create({
 
 
 export default function SetFastTime() {
+    const [date, setDate] = useState(new Date());
     return (
         <View style={style.container}>
             <Text style={ModalStyle.header}>Set the fast time </Text>
+             {/* <DatePicker date={date} onDateChange={setDate} /> */}
         </View>
         
     );

@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.chanjaso1.Assignment2"
     },
     "web": {
       "favicon": "./assets/favicon.png"
