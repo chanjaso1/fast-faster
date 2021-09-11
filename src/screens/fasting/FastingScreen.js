@@ -47,13 +47,13 @@ export default function fastingScreen() {
                     </View> 
                 </View>
             </Modal>
-            {/* <FlatButton text="Start" onPress={() => {setVisible(true); setModalContent('SetFastTime'); }}  /> */}
-            <FlatButton text="Start" onPress={() => {
+            <FlatButton text="Start" onPress={() => {setVisible(true); setModalContent('SetFastTime'); }}  />
+            {/* <FlatButton text="Start" onPress={() => {
                 turnTimerOn(timerOn => !timerOn)
                 setMounted(mounted => !mounted);
                 setModalContent("SetFastTime");
                 setVisible(true);
-                }}  />
+                }}  /> */}
             
             
             

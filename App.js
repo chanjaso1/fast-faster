@@ -3,6 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+// import Navigator from './routes/homeStack'
 
 import mealPlanScreen from './src/screens/mealPlan/MealPlanScreen';
 import fastingScreen from './src/screens/fasting/FastingScreen';
