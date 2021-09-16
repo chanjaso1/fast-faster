@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1073332883787",
+    "project_id": "assignment2-2ad5d",
+    "storage_bucket": "assignment2-2ad5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073332883787:android:a8baf474c8749d114118ce",
+        "android_client_info": {
+          "package_name": "nz.com.assignment2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073332883787-k7g0hji2ks7sa549v4oqv202ivk08lmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAiUOJjfUbdczROsxYnjC7sdnpP1YuVv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073332883787-k7g0hji2ks7sa549v4oqv202ivk08lmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

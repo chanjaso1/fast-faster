@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, CheckBox } from "react-native";
 import ModalStyle from "../src/styles/ModalStyle";
 // import DateTimePicker from '@react-native-community/datetimepicker';
 // import DatePicker from 'react-native-date-picker'
 
 const style = StyleSheet.create({
     container:{
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -33,3 +33,40 @@ export  function ChangeFastTime() {
         
     );
 };
+
+const checkboxHandler = (value, index) => {
+    const newValue = checkboxValue.map((checkbox, i) => {
+     if (i !== index)
+       return {
+         ...checkbox,
+         checked: false,
+       }
+     if (i === index) {
+       const item = {
+         ...checkbox,
+         checked: !checkbox.checked,
+       }
+       return item
+     }
+    return checkbox
+  })
+  setCheckboxValue(newValue)
+  }    
+
+
+export function DisplayMealPlan({mealPlan}) {
+    const [checked, setChecked] = useState(false);
+
+    return (
+        <View style={style.container}>
+            {checked}
+
+            <Text style={ModalStyle.header}>{mealPlan.day}</Text>
+            {mealPlan.breakfast != '' ? <View style={ModalStyle.checkBox}>
+                <Text style={ModalStyle.content}> {mealPlan.meal}</Text> 
+                <CheckBox value={checked} onValueChange={setChecked} style={alignItems='center'}/>
+            </View> :  null }
+        
+        </View>
+    )
+}

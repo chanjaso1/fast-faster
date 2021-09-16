@@ -13,7 +13,6 @@ export default function FlatButton({text, onPress, cancel}) {
 
     return (
         <TouchableOpacity onPress={onPress}>
-            
             <View style={buttonStyle}>
                 <Text style={textStyle}>{text}</Text>
             </View>

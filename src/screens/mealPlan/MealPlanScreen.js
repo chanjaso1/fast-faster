@@ -1,19 +1,26 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import buttonText, { RoundButton } from '../../../components/Button';
-import Card from '../../../components/Card';
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import { DisplayMealPlan } from '../../../components/PopUp';
+import ModalStyle from '../../styles/ModalStyle';
+import FlatButton from '../../../components/Button';
+// import Pop
+// import Card from '../../../components/Card';
 
 const mealPlanScreen = () => {
     const [meals, setMeals] = useState([
-        {day: 'Monday', breakfast: 'cereal', lunch: '', dinner: ''},
-        {day: 'Tuesday', breakfast: '', lunch: 'sandwich', dinner: ''},
-        {day: 'Wednesday', breakfast: 'coffee', lunch: '', dinner: 'fried rice'},
-        {day: 'Thursday', breakfast: 'cereal', lunch: '', dinner: 'tortillas'},
-        {day: 'Friday', breakfast: 'porridge', lunch: '', dinner: ''},
-        {day: 'Saturday', breakfast: 'cereal', lunch: 'fish and chips', dinner: ''},
-        {day: 'Sunday', breakfast: 'salad', lunch: 'sandwich', dinner: 'fried chicken'},
+        {day: 'Monday', meals: [{name: 'cereal', checked: false}, {name: 'rth', checked: true}]},
+        // {day: 'Tuesday', meal: 'sandwich', checked: false},
+        // {day: 'Wednesday', meal: 'coffee', checked: false},
+        // {day: 'Thursday', meal: 'cereal', checked: false},
+        // {day: 'Friday', meal: 'porridge', checked: false},
+        // {day: 'Saturday', meal: 'cereal', checked: false},
+        // {day: 'Sunday', meal: 'salad', checked: false},
     ]);
+
+
+    const [visible, setVisible] = useState(false);
+    const [meal, setMeal] = useState(null);
 
 
     const nothingMuch = () => {
@@ -22,38 +29,38 @@ const mealPlanScreen = () => {
 
     return (
         <View style={{ paddingTop: 10, paddingHorizontal: 20, width: "100%", justifyContent:"center"}}>
+            <Modal transparent visible={visible} animationType='fade'>
+                <View style={ModalStyle.modalBackground}>
+                    <View style={ModalStyle.modalContainer}>
+                        <DisplayMealPlan mealPlan={meal}/>
+                        {/* {modalContent == 'SetFastTime' ? <SetFastTime/> : null} */}
+                        <FlatButton text='cancel' onPress={() => (setVisible(false))} cancel={true}/>
+                    </View> 
+                </View>
+            </Modal>
+
             <ScrollView>
                 {meals.map((item) => {
                     return(
                         // <Card>
-                            <TouchableOpacity key={item.day} style={styles.item}>
+                            <TouchableOpacity key={item.day} style={styles.item} onPress={() => {setVisible(true); setMeal(item)}}>
                                 {/* <RoundButton onPress={nothingMuch} alignItems= 'flex-end'/> */}
+                                
                             
                                     <Text style={styles.itemHeader}>
                                         {item.day} </Text>
                                         {/* {"\n"} */}
-                                        {item.breakfast != '' ? <Text style={styles.itemContent}> {item.breakfast}</Text> : null}
-                                        {item.lunch != '' ? <Text style={styles.itemContent}> {item.lunch}</Text> : null}
-                                        {item.dinner != '' ? <Text style={styles.itemContent}> {item.dinner}</Text> : null}
-
-                                        {/* <Text style={styles.itemContent}> {item.breakfast} </Text> */}
-                                        {/* <Text style={styles.itemContent}> {item.lunch} </Text>
-                                        <Text style={styles.itemContent}> {item.dinner} </Text> */}
-                                        
-                                        {item.breakfast == '' && item.lunch == '' && item.dinner == '' ? 
-                                            <Text style={styles.itemContent}>No Meals Planned{"\n"}</Text> :  null}
-
-                                    
-                            
+                                        {/* {item.meals.em ? <Text style={styles.itemContent}> WOW</Text> : null} */}
+                                        {/* {item.meals} */}
+                                        {/* {item.meals[0].name = cereal} */}
+                           
                                 {/* <RoundButton onPress={nothingMuch} alignItems= 'flex-end'/> */}
                             </TouchableOpacity>
                    
                     );
                 })
                 }
-
             </ScrollView>
-            <Text>Meal Planning!</Text>
         </View>
     );
 }

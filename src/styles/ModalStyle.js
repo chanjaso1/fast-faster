@@ -25,6 +25,22 @@ const ModalStyle = StyleSheet.create ({
         fontSize: 20,
         fontWeight: 'bold',
         color: 'rgba(0,0,0,0.75)'
+    },
+    content: {
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'rgba(0,0,0,0.75)',
+        margin: 5,
+        textTransform: 'capitalize', 
+    },
+
+    checkBox: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignSelf: 'center'
     }
 }) ;
 
