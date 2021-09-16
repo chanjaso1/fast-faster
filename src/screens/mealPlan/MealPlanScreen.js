@@ -50,7 +50,7 @@ const mealPlanScreen = () => {
                                     <Text style={styles.itemHeader}>
                                         {item.day} </Text>
                                         {/* {"\n"} */}
-                                        {/* {item.meals.em ? <Text style={styles.itemContent}> WOW</Text> : null} */}
+                                        {item.meals.em ?? <Text style={styles.itemContent}></Text>}
                                         {/* {item.meals} */}
                                         {/* {item.meals[0].name = cereal} */}
                            
