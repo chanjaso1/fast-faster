@@ -1,69 +1,101 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal} from 'react-native';
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal, FlatList} from 'react-native';
 import { DisplayMealPlan } from '../../../components/PopUp';
 import ModalStyle from '../../styles/ModalStyle';
 import FlatButton from '../../../components/Button';
-// import Pop
-// import Card from '../../../components/Card';
 
 const mealPlanScreen = () => {
-    const [meals, setMeals] = useState([
-        {day: 'Monday', meals: [{name: 'cereal', checked: false}, {name: 'rth', checked: true}]},
-        // {day: 'Tuesday', meal: 'sandwich', checked: false},
-        // {day: 'Wednesday', meal: 'coffee', checked: false},
-        // {day: 'Thursday', meal: 'cereal', checked: false},
-        // {day: 'Friday', meal: 'porridge', checked: false},
-        // {day: 'Saturday', meal: 'cereal', checked: false},
-        // {day: 'Sunday', meal: 'salad', checked: false},
+    const [plan, setMeals] = useState([
+        {day: 'Monday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '1 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '1 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '1 16:42:00'},
+        ]},
+        {day: 'Tuesday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '2 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '2 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '2 16:42:00'},
+        ]},
+        {day: 'Wednesday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '3 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '3 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '3 16:42:00'},
+        ]},
+        {day: 'Thursday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '4 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '4 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '4 16:42:00'},
+        ]},
+        {day: 'Friday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '5 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '5 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '5 16:42:00'},
+        ]},
+        {day: 'Saturday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '6 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '6 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '6 16:42:00'},
+        ]},
+        {day: 'Sunday', meals: [
+            {name: 'Cereal', checked: false, timeToEat: '7 08:25:00'},
+            {name: 'Tacos', checked: false, timeToEat:  '7 12:35:00'},
+            {name: 'Fried Chicken', checked: false, timeToEat: '7 16:42:00'},
+        ]},
+        
     ]);
 
 
     const [visible, setVisible] = useState(false);
-    const [meal, setMeal] = useState(null);
+    const [selectedDay, setSelectedDay] = useState(null);
 
+    function mealDay(){
 
-    const nothingMuch = () => {
-
+        const renderFood = (food) => {
+            // console.log(selectedDay)
+            return plan.map(aDay => {
+                if(aDay.day == food.item.day){  //get the correct day
+                    return aDay.meals.map(meal => {
+                        return <Text key={meal.timeToEat} style={styles.itemContent}>{meal.name}</Text>
+                    })
+                }
+            })
+        }
+    
+        return (
+            <View>
+                <FlatList 
+                data={plan}
+                extraData={plan}
+                keyExtractor={(item) => item.day}
+                renderItem={item => 
+                    <TouchableOpacity style={styles.item} onPress={() => {setVisible(true); setSelectedDay(item.item.day)}}>
+                        <Text style={styles.itemHeader}> {item.item.day} </Text>
+                        {renderFood(item)}
+                    </TouchableOpacity>
+                }/>
+            </View>
+        )
     }
-
+        
     return (
         <View style={{ paddingTop: 10, paddingHorizontal: 20, width: "100%", justifyContent:"center"}}>
             <Modal transparent visible={visible} animationType='fade'>
                 <View style={ModalStyle.modalBackground}>
                     <View style={ModalStyle.modalContainer}>
-                        <DisplayMealPlan mealPlan={meal}/>
-                        {/* {modalContent == 'SetFastTime' ? <SetFastTime/> : null} */}
+                        <DisplayMealPlan mealPlan={plan} onMealPlanChange={setMeals} day={selectedDay}/>
                         <FlatButton text='cancel' onPress={() => (setVisible(false))} cancel={true}/>
                     </View> 
                 </View>
             </Modal>
 
-            <ScrollView>
-                {meals.map((item) => {
-                    return(
-                        // <Card>
-                            <TouchableOpacity key={item.day} style={styles.item} onPress={() => {setVisible(true); setMeal(item)}}>
-                                {/* <RoundButton onPress={nothingMuch} alignItems= 'flex-end'/> */}
-                                
-                            
-                                    <Text style={styles.itemHeader}>
-                                        {item.day} </Text>
-                                        {/* {"\n"} */}
-                                        {item.meals.em ?? <Text style={styles.itemContent}></Text>}
-                                        {/* {item.meals} */}
-                                        {/* {item.meals[0].name = cereal} */}
-                           
-                                {/* <RoundButton onPress={nothingMuch} alignItems= 'flex-end'/> */}
-                            </TouchableOpacity>
-                   
-                    );
-                })
-                }
-            </ScrollView>
+           
+            {mealDay()}
+            
+           
         </View>
     );
-}
+        }
 
 const styles = StyleSheet.create ({
     item : {
@@ -82,7 +114,8 @@ const styles = StyleSheet.create ({
         fontWeight: 'bold',
         textAlignVertical: 'top',
         textTransform: 'capitalize', 
-        paddingTop: 5
+        paddingTop: 5,
+        paddingLeft: 20
     },
 
     selectedItem: {

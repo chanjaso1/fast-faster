@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect, useRef} from "react";
 import { View, Text, StyleSheet } from "react-native";
 
@@ -8,7 +7,6 @@ const Timer = ({hours, isMounted}) => {
 
     useEffect  (() => {
         isMounted = true;
-        console.log("here?");
         countDown({hours})
         return() => {
             isMounted = false;
@@ -22,7 +20,7 @@ const Timer = ({hours, isMounted}) => {
                   // console.log(`${hours}`)
                     finish.setHours(finish.getHours() + `${hours}`);
                     console.log(finish.getHours());
-                    let testDate = new Date('Sept 7 2021 21:35:00').getTime();
+                    let testDate = new Date('Oct 9 2021 21:35:00').getTime();
                 
                     let count = setInterval(() => {
                         setTitle('Time left');

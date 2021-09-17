@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import { StyleSheet, View, Text, CheckBox } from "react-native";
 import ModalStyle from "../src/styles/ModalStyle";
 // import DateTimePicker from '@react-native-community/datetimepicker';
@@ -6,9 +6,8 @@ import ModalStyle from "../src/styles/ModalStyle";
 
 const style = StyleSheet.create({
     container:{
-        // flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center'    
     },
 });
 
@@ -34,39 +33,48 @@ export  function ChangeFastTime() {
     );
 };
 
-const checkboxHandler = (value, index) => {
-    const newValue = checkboxValue.map((checkbox, i) => {
-     if (i !== index)
-       return {
-         ...checkbox,
-         checked: false,
-       }
-     if (i === index) {
-       const item = {
-         ...checkbox,
-         checked: !checkbox.checked,
-       }
-       return item
-     }
-    return checkbox
-  })
-  setCheckboxValue(newValue)
-  }    
+  
 
 
-export function DisplayMealPlan({mealPlan}) {
-    const [checked, setChecked] = useState(false);
-
-    return (
+export function DisplayMealPlan({mealPlan, onMealPlanChange, day}) {
+    console.log(day)
+    return(  
         <View style={style.container}>
-            {checked}
-
-            <Text style={ModalStyle.header}>{mealPlan.day}</Text>
-            {mealPlan.breakfast != '' ? <View style={ModalStyle.checkBox}>
-                <Text style={ModalStyle.content}> {mealPlan.meal}</Text> 
-                <CheckBox value={checked} onValueChange={setChecked} style={alignItems='center'}/>
-            </View> :  null }
-        
-        </View>
-    )
+            <Text style={ModalStyle.header}>{day}</Text>  
+                {displayMeals(mealPlan, onMealPlanChange, day)}
+        </View> 
+    )    
 }
+
+function displayMeals(mealPlan, onMealPlanChange, day) {
+    const handleBoxChange = useCallback((meal) => {
+        var newPlan = JSON.parse(JSON.stringify(mealPlan))
+        newPlan.map(aDay => {
+            if(aDay.day == day){
+                aDay.meals.map(aMeal => {
+                    if(aMeal.timeToEat == meal.timeToEat) {
+                        aMeal.checked = !aMeal.checked
+                    }
+                })
+            }
+        })
+        {onMealPlanChange(newPlan)}
+    }, [mealPlan])
+
+    return mealPlan.map((aDay => {
+        if(aDay.day == day){
+            return aDay.meals.map(meal => {
+                return (<View key={meal.timeToEat} style={ModalStyle.checkBox}>
+                        <Text style={ModalStyle.content}> {meal.name}</Text> 
+                         <CheckBox
+                            value={meal.checked}
+                            onValueChange={() => {handleBoxChange(meal)}}/>
+                    </View>
+                );
+            })
+        }
+    }))
+}
+
+
+
