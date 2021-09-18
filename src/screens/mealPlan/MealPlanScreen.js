@@ -56,7 +56,7 @@ const mealPlanScreen = () => {
             return plan.map(aDay => {
                 if(aDay.day == food.item.day){  //get the correct day
                     return aDay.meals.map(meal => {
-                        return <Text key={meal.timeToEat} style={styles.itemContent}>{meal.name}</Text>
+                        return <Text key={meal.timeToEat} style={meal.checked == true ? styles.tickedItemContent : styles.itemContent}>{meal.name}</Text>
                     })
                 }
             })
@@ -116,6 +116,17 @@ const styles = StyleSheet.create ({
         textTransform: 'capitalize', 
         paddingTop: 5,
         paddingLeft: 20
+    },
+    tickedItemContent: {
+        color: 'rgba(0,0,0,0.75)',
+        fontSize: 22,
+        fontWeight: 'bold',
+        textAlignVertical: 'top',
+        textTransform: 'capitalize', 
+        paddingTop: 5,
+        paddingLeft: 20,
+        textDecorationLine: 'line-through',
+        // textDecorationStyle: 'bold',
     },
 
     selectedItem: {
