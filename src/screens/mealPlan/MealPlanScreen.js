@@ -4,8 +4,12 @@ import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal, FlatList} 
 import { DisplayMealPlan } from '../../../components/PopUp';
 import ModalStyle from '../../styles/ModalStyle';
 import FlatButton from '../../../components/Button';
+import { useNavigation } from '@react-navigation/native';
+import MealScreen from './MealScreen';
 
-const mealPlanScreen = () => {
+const mealPlanScreen = (props) => {
+    const navi = useNavigation();
+
     const [plan, setMeals] = useState([
         {day: 'Monday', meals: [
             {name: 'Cereal', checked: false, timeToEat: '1 08:25:00'},
@@ -48,6 +52,7 @@ const mealPlanScreen = () => {
 
     const [visible, setVisible] = useState(false);
     const [selectedDay, setSelectedDay] = useState(null);
+    // const {navigation} = props
 
     function mealDay(){
 
@@ -69,7 +74,7 @@ const mealPlanScreen = () => {
                 extraData={plan}
                 keyExtractor={(item) => item.day}
                 renderItem={item => 
-                    <TouchableOpacity style={styles.item} onPress={() => {setVisible(true); setSelectedDay(item.item.day)}}>
+                    <TouchableOpacity style={styles.item} onPress={() => {setSelectedDay(item.item.day); navi.navigate('Meals')}}>
                         <Text style={styles.itemHeader}> {item.item.day} </Text>
                         {renderFood(item)}
                     </TouchableOpacity>
@@ -83,13 +88,13 @@ const mealPlanScreen = () => {
             <Modal transparent visible={visible} animationType='fade'>
                 <View style={ModalStyle.modalBackground}>
                     <View style={ModalStyle.modalContainer}>
-                        <DisplayMealPlan mealPlan={plan} onMealPlanChange={setMeals} day={selectedDay}/>
+                        <DisplayMealPlan mealPlan={plan} onMealPlanChange={setMeals} day={selectedDay} />
                         <FlatButton text='cancel' onPress={() => (setVisible(false))} cancel={true}/>
                     </View> 
                 </View>
             </Modal>
 
-           
+           {/* const {navigation} = props */}
             {mealDay()}
             
            
