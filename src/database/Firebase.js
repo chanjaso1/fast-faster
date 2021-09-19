@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import * as firebase from "firebase";
 import "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -20,18 +21,84 @@ const firebaseConfig = {
 
 // Initialize Firebase
 
-let app;
-//   export default function firebase () {
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     //   }
     }
     
-    const dbh = firebase.firestore(app);
-    export default Firebase;
-    
-    //   dbh.collection("test").doc("testDoc").set({
-    //     a : "dog",
-    //     b : "busy-bee"
-    //   });
-  
+export const dbh = firebase.firestore();
+
+
+
+export const queryDay = async (day) => {
+    let items = []
+
+    try {
+    const aDay = await dbh.collection("Foods").where('day', '==', day).get().then(
+      data => {
+        if(data.empty){
+          console.log("The data is empty")
+        }else{
+          data.forEach(doc => {
+            let item = {
+              id: doc.id,
+              day: doc.data().day,
+              name: doc.data().name,
+              timeToEat: doc.data().timeToEat,
+              checked: doc.data().checked
+            }
+            items.push(item)
+            // console.log(item, 'yep')
+          })
+        }
+      }
+    );
+    console.log('READING . . . .')
+    return items
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+export const queryDays = async () => {
+  let items = []
+  try {
+  const aDay = await dbh.collection("Foods").get().then(
+    data => {
+      if(data.empty){
+        console.log("The data is empty")
+      }else{
+        data.forEach(doc => {
+          let item = {
+            id: doc.id,
+            day: doc.data().day,
+            name: doc.data().name,
+            timeToEat: doc.data().timeToEat,
+            checked: doc.data().checked
+          }
+          items.push(item)
+        })
+      }
+    }
+  );
+  console.log('READING . . . .')
+  return items
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const setPlans = async (plan) => {
+  let items = []
+  try {
+    const newPlans = await dbh.collection("Foods").set({
+          day: plan.day,
+          timeToEat: plan.timeToEat,
+          checked: plan.checked,
+          name: plan.name
+    })
+    console.log("WRITING . . . .")
+  } catch (error) {
+    console.log(error)
+  }
+}

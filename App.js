@@ -9,7 +9,6 @@ import mealPlanScreen from './src/screens/mealPlan/MealPlanScreen';
 import fastingScreen from './src/screens/fasting/FastingScreen';
 import settingsScreen from './src/screens/settings/SettingScreen';
 import statisticsScreen from './src/screens/statistics/StatisticsScreen';
-import { createStackNavigator } from 'react-navigation-stack';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import MealScreen from './src/screens/mealPlan/MealScreen';
  

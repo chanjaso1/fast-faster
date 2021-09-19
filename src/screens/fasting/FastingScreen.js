@@ -7,6 +7,7 @@ import FlatButton from '../../../components/Button';
 import ModalStyle from '../../styles/ModalStyle'; 
 import SetFastTime, {ChangeFastTime} from '../../../components/PopUp';
 import Timer from '../../../components/Timer';
+import { TimePicker } from '../../../components/TimePicker';
   
   
 
@@ -58,6 +59,7 @@ export default function fastingScreen() {
             
             
             <FlatButton text="Change Fast" onPress={() => {setVisible(true); setModalContent('ChangeFastTime') }}   />
+            <TimePicker/>
         </View>
      
     );

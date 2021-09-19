@@ -19,7 +19,7 @@ const Timer = ({hours, isMounted}) => {
                     // finish.setHours(finish.get + {hours}); //add the fasting time period
                   // console.log(`${hours}`)
                     finish.setHours(finish.getHours() + `${hours}`);
-                    console.log(finish.getHours());
+                    // console.log(finish.getHours());
                     let testDate = new Date('Oct 9 2021 21:35:00').getTime();
                 
                     let count = setInterval(() => {
@@ -37,9 +37,9 @@ const Timer = ({hours, isMounted}) => {
                         let minutes = Math.floor( (timeToFinish % (1000 * 3600)) / (1000 * 60)  );
             
                         let seconds = Math.floor( (timeToFinish % (1000 * 60)) / (1000));
-                        console.log(seconds);
+                        // console.log(seconds);
                       //  hours = hours < 
-                        console.log(`${hours}:${minutes}:${seconds}`);
+                        // console.log(`${hours}:${minutes}:${seconds}`);
                         setTime(`${hours}:${minutes}:${seconds}`);
             
                         if(timeToFinish < 0) {
