@@ -14,10 +14,16 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
 
     useEffect  (() => {
         isMounted = true;
+        setUpdate(1000)
         setEndDate(target)
         setStartDate(start)
         countDown()
         return() => {
+            setTitle('')
+            setTime('...')
+            setEndDate('')
+            setStartDate('')
+            setUpdate(9999999999999)
             isMounted = false;
         };
 
@@ -25,8 +31,6 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
             setTimeout(() => {
                 if(isMounted){
                     let count = setInterval(() => {
-                        console.log(endDate, ' is the end date')
-                        console.log(startDate)
                         setTitle('Time left');
                         let target = new Date(endDate).getTime()//get the target date
                         let current = new Date().getTime();//get the current time
@@ -46,7 +50,6 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                             let stringSeconds = seconds < 10 ? `0${seconds}` : seconds  
 
                             setTime(`${stringHours}:${stringMinutes}:${stringSeconds}`); //set the time
-                            // isMounted= false
                         }
             
                         if(timeToFinish < 0) {

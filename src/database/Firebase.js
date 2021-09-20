@@ -52,7 +52,7 @@ export const queryDay = async (day) => {
         }
       }
     );
-    console.log('READING . . . .')
+    console.log('READING DAY. . . .')
     return items
     } catch (error) {
       console.log(error)
@@ -80,7 +80,7 @@ export const queryDays = async () => {
       }
     }
   );
-  console.log('READING . . . .')
+  console.log('READING DAYS. . . .')
   return items
   } catch (error) {
     console.log(error)

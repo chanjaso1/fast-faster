@@ -86,7 +86,7 @@ export default function fastingScreen() {
             
             
             
-            <FlatButton text="Change Fast" onPress={() => {setVisible(true); showDatePicker() }}   />
+            <FlatButton text="End" onPress={() => {turnTimerOn(false); setMounted(false)}}   />
             {/* based on: https://github.com/mmazzarolo/react-native-modal-datetime-picker */}
             <DateTimePickerModal
             isVisible={isDatePickerVisible}
