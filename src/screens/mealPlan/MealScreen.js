@@ -29,7 +29,7 @@ const foodList = () => {
   return plan.map(meal => {
     return(
          <View style={styles.container}>
-         <Text style={styles.text} key={meal.timeToEat + meal.name}>
+         <Text style={styles.text} key={meal.timeToEat * meal.name}>
            {meal.name}
          </Text>
          <CheckBox style={ModalStyle.CheckBox, {paddingBottom:20}}

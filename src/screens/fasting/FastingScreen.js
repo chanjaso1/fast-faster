@@ -7,24 +7,52 @@ import FlatButton from '../../../components/Button';
 import ModalStyle from '../../styles/ModalStyle'; 
 import SetFastTime, {ChangeFastTime} from '../../../components/PopUp';
 import Timer from '../../../components/Timer';
-import { TimePicker } from '../../../components/TimePicker';
+// import { TimePicker } from '../../../components/TimePicker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import moment from 'moment';
+// import 'moment-timezone';
   
   
 
 export default function fastingScreen() {
     const [mounted, setMounted] = useState(true);
-    const [progress, setProgress] = useState(50);
-    const [timer, turnTimerOn] = useState(true);
+    const [progress, setProgress] = useState(0);
+    const [timer, turnTimerOn] = useState(false);
+    const [endDate, setEndDate] = useState('')
+    const [startDate, setStartDate] = useState('')
     
 
     const [visible, setVisible] = useState(false);
     const [modalContent, setModalContent] = useState('');
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+    const showDatePicker = () => {
+      setDatePickerVisibility(true);
+    };
+  
+    const hideDatePicker = () => {
+      setDatePickerVisibility(false);
+    };
+  
+    const handleConfirm = (newDate) => {
+        // 'Oct 9 2021 21:35:00'
+    //   console.warn("A date has been picked: ", newDate);
+    //   moment.locale('en');
+    //   moment.locale('en')
+      console.log(moment(newDate).format('MMM D YYYY H:mm:ss'))
+      setEndDate(moment(newDate).format('MMM D YYYY H:mm:ss'))
+      setStartDate(moment().format('MMM D YYYY H:mm:ss'))
+      turnTimerOn(true)
+      hideDatePicker();
+      
+    };
+  
 
 
 
     return (
         <View style={style.container}>
-            {timer == true ? <Timer hours='1' isMounted={mounted}/> : null}
+            {timer == true ? <Timer target={endDate} start={startDate} isMounted={mounted} setProgressBar={setProgress}/> : null}
             <CircularProgress style={style.circle}
                 radius={150}
                 value={progress % 101}
@@ -48,7 +76,7 @@ export default function fastingScreen() {
                     </View> 
                 </View>
             </Modal>
-            <FlatButton text="Start" onPress={() => {setVisible(true); setModalContent('SetFastTime'); }}  />
+            <FlatButton text="Start" onPress={() => {setVisible(true); showDatePicker()}}  />
             {/* <FlatButton text="Start" onPress={() => {
                 turnTimerOn(timerOn => !timerOn)
                 setMounted(mounted => !mounted);
@@ -58,8 +86,15 @@ export default function fastingScreen() {
             
             
             
-            <FlatButton text="Change Fast" onPress={() => {setVisible(true); setModalContent('ChangeFastTime') }}   />
-            <TimePicker/>
+            <FlatButton text="Change Fast" onPress={() => {setVisible(true); showDatePicker() }}   />
+            {/* based on: https://github.com/mmazzarolo/react-native-modal-datetime-picker */}
+            <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="datetime"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            is24Hour={true}
+            />
         </View>
      
     );

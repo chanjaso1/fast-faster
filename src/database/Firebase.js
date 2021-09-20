@@ -20,11 +20,10 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
 
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    //   }
-    }
+}
     
 export const dbh = firebase.firestore();
 
