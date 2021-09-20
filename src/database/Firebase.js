@@ -25,6 +25,7 @@ if (!firebase.apps.length) {
 }
 export const dbh = firebase.firestore();
 
+//based on: https://firebase.google.com/docs/firestore/query-data/get-data
 export const queryDay = async (day) => {
     let items = []
 
@@ -54,6 +55,7 @@ export const queryDay = async (day) => {
     }
 }
 
+//based on: https://firebase.google.com/docs/firestore/query-data/get-data
 export const queryDays = async () => {
   let items = []
   try {
@@ -82,7 +84,7 @@ export const queryDays = async () => {
   }
 }
 
-
+//based on: https://firebase.google.com/docs/firestore/manage-data/add-data
 export const addMeal = async (item) => {
   try {
     const newPlans = await dbh.collection("Foods").add({//Add a new meal
@@ -97,6 +99,8 @@ export const addMeal = async (item) => {
     console.log(error)
   }
 }
+
+//based on: https://firebase.google.com/docs/firestore/manage-data/add-data
 export const updateMeal = async (item) => {
   try {
     const newPlans = await dbh.collection("Foods").doc(item.id).set({//Update a meal
@@ -107,6 +111,16 @@ export const updateMeal = async (item) => {
           doc: item.id
     })
     console.log("UPDATING . . . .")
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//based on: https://firebase.google.com/docs/firestore/manage-data/delete-data
+export const deleteMeal = async (item) => {
+  try {
+    const newPlans = await dbh.collection("Foods").doc(item.id).delete()
+    console.log("DELETING . . . .")
   } catch (error) {
     console.log(error)
   }

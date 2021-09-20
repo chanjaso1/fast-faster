@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { StyleSheet, View, Text, CheckBox, Button, Modal, LogBox } from 'react-native'
 import { useIsFocused } from '@react-navigation/native';
-import {queryDay, updateMeal} from './../../database/Firebase'
+import {deleteMeal, queryDay, updateMeal} from './../../database/Firebase'
 import ModalStyle from '../../styles/ModalStyle'
 import {AddPlan} from '../../../components/PopUp';
 import { YellowBox } from 'react-native';
@@ -35,6 +35,19 @@ const handleTick = ((meal) => {
   setPlan(newPlan)
 })
 
+const handleDelete = ((meal) => {
+  var newPlan = []
+  plan.map(aMeal => {
+    // console.log(aMeal)
+    // console.log(meal.timeToEat, ' is the target')
+    if(aMeal.timeToEat != meal.timeToEat){
+        newPlan.push(aMeal)
+    }
+  })
+  setPlan(newPlan)
+  deleteMeal(meal)
+})
+
 
 
 const foodList = () => {
@@ -49,8 +62,8 @@ const foodList = () => {
           <CheckBox style={ModalStyle.CheckBox, {paddingBottom:20}}
             value={meal.checked}
             onValueChange={() => {handleTick(meal)}}
-         
           />
+          <Button title='delete' onPress={() => {handleDelete(meal)}}/>
         </View>
         
       )
