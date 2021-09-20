@@ -6,9 +6,6 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
     const [time, setTime] = useState('...');
     const [endDate, setEndDate] = useState('');
     const [update, setUpdate] = useState(1000);
-    // const startDate = useMemo(() =>{
-    //     return new Date() 
-    // }, [endDate])
 
     const [startDate, setStartDate] = useState('')
 
@@ -18,7 +15,7 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
         setEndDate(target)
         setStartDate(start)
         countDown()
-        return() => {
+        return() => {   //clean up states
             setTitle('')
             setTime('...')
             setEndDate('')
@@ -52,7 +49,7 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                             setTime(`${stringHours}:${stringMinutes}:${stringSeconds}`); //set the time
                         }
             
-                        if(timeToFinish < 0) {
+                        if(timeToFinish < 0) {  //when the timer finishes
                             setTitle("You're done!");
                             setProgressBar(100)
                             setTime('');

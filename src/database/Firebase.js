@@ -22,12 +22,8 @@ const firebaseConfig = {
 // Initialize Firebase
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
-
 }
-    
 export const dbh = firebase.firestore();
-
-
 
 export const queryDay = async (day) => {
     let items = []
@@ -47,7 +43,6 @@ export const queryDay = async (day) => {
               checked: doc.data().checked
             }
             items.push(item)
-            // console.log(item, 'yep')
           })
         }
       }
@@ -62,7 +57,7 @@ export const queryDay = async (day) => {
 export const queryDays = async () => {
   let items = []
   try {
-  const aDay = await dbh.collection("Foods").get().then(
+  const aDay = await dbh.collection("Foods").get().then(//Get all meals 
     data => {
       if(data.empty){
         console.log("The data is empty")
@@ -87,16 +82,31 @@ export const queryDays = async () => {
   }
 }
 
-export const setPlans = async (plan) => {
-  let items = []
+
+export const addMeal = async (item) => {
   try {
-    const newPlans = await dbh.collection("Foods").set({
-          day: plan.day,
-          timeToEat: plan.timeToEat,
-          checked: plan.checked,
-          name: plan.name
+    const newPlans = await dbh.collection("Foods").add({//Add a new meal
+          day: item.day,
+          timeToEat: item.timeToEat,
+          checked: item.checked,
+          name: item.name,
+          doc: doc.id
     })
     console.log("WRITING . . . .")
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const updateMeal = async (item) => {
+  try {
+    const newPlans = await dbh.collection("Foods").doc(item.id).set({//Update a meal
+          day: item.day,
+          timeToEat: item.timeToEat,
+          checked: item.checked,
+          name: item.name,
+          doc: item.id
+    })
+    console.log("UPDATING . . . .")
   } catch (error) {
     console.log(error)
   }

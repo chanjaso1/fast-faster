@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'; 
+import React, { useState } from 'react'; 
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Modal, Text} from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 import FlatButton from '../../../components/Button';
-import ModalStyle from '../../styles/ModalStyle'; 
-import SetFastTime, {ChangeFastTime} from '../../../components/PopUp';
 import Timer from '../../../components/Timer';
 // import { TimePicker } from '../../../components/TimePicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -65,18 +63,8 @@ export default function fastingScreen() {
             />
             <StatusBar style='auto'/>
             
-            <Modal transparent visible={visible} animationType='fade'>
-                <View style={ModalStyle.modalBackground}>
-                    <View style={ModalStyle.modalContainer}>
-                        <View style={ModalStyle.header}>
-                            {modalContent == 'SetFastTime' ? <SetFastTime/> : null}
-                            {modalContent == 'ChangeFastTime' ? <ChangeFastTime/> : null}
-                        </View>
-                        <FlatButton text='cancel' onPress={() => (setVisible(false))} cancel={true}/>
-                    </View> 
-                </View>
-            </Modal>
-            <FlatButton text="Start" onPress={() => {setVisible(true); showDatePicker()}}  />
+      
+            <FlatButton text="Start" onPress={() => {showDatePicker()}}  />
             {/* <FlatButton text="Start" onPress={() => {
                 turnTimerOn(timerOn => !timerOn)
                 setMounted(mounted => !mounted);

@@ -33,6 +33,7 @@
     "react-native-date-picker": "^4.0.0",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-modal-datetime-picker": "^11.0.0",
+    "react-native-paper": "^4.9.2",
     "react-native-reanimated": "~2.2.0",
     "react-native-screens": "~3.4.0",
     "react-native-svg": "12.1.1",

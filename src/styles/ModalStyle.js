@@ -9,17 +9,21 @@ const ModalStyle = StyleSheet.create ({
     },
 
     modalContainer: {
+        height : 325,
         width: '80%',
         backgroundColor: 'white',
         paddingHorizontal: 20,
         paddingVertical: 20,
         borderRadius: 20,
-        elevation: 20
+        elevation: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     header: {
      //   width: '80%',
-        height: 40,
+        height: 45,
+        paddingTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 20,
