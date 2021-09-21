@@ -11,6 +11,8 @@ import settingsScreen from './src/screens/settings/SettingScreen';
 import statisticsScreen from './src/screens/statistics/StatisticsScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import MealScreen from './src/screens/mealPlan/MealScreen';
+import NotificationsScreen from './src/screens/settings/NotificationsScreen';
+import PersonalScreen from './src/screens/settings/PersonalScreen';
  
 
 const Tab = createBottomTabNavigator();
@@ -25,12 +27,23 @@ function mealStackNavigator() {
     )
 }
 
+function settingStackNavigator() {
+    return (
+        <Stack.Navigator initialRouteName = 'Your Settings' screenOptions={{headerShown: false}}>
+            <Stack.Screen name='Your Settings' component={settingsScreen} options={{title: 'Your Settings'}}/>
+            <Stack.Screen name='Notifications' component={NotificationsScreen} options={{title: 'Notifications'}}/>
+            <Stack.Screen name='Personal Information' component={PersonalScreen} options={{title: 'Your Personal Information'}}/>
+        </Stack.Navigator>
+    )
+}
+
  
 
  const Navigator = () => {
   return (
     <NavigationContainer>
     <Tab.Navigator
+        initialRouteName = 'Fasting'
         screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
@@ -54,7 +67,7 @@ function mealStackNavigator() {
         <Tab.Screen name="Planning"  component={mealStackNavigator} options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Fasting" component={fastingScreen}  options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Statistics" component={statisticsScreen}  options={{headerTitleAlign : 'center'}}/>
-        <Tab.Screen name="Settings" component={settingsScreen}  options={{headerTitleAlign : 'center'}}/>
+        <Tab.Screen name="Settings" component={settingStackNavigator}  options={{headerTitleAlign : 'center'}}/>
     
   
     </Tab.Navigator>

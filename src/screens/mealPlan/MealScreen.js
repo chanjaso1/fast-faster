@@ -38,8 +38,6 @@ const handleTick = ((meal) => {
 const handleDelete = ((meal) => {
   var newPlan = []
   plan.map(aMeal => {
-    // console.log(aMeal)
-    // console.log(meal.timeToEat, ' is the target')
     if(aMeal.timeToEat != meal.timeToEat){
         newPlan.push(aMeal)
     }
