@@ -8,16 +8,17 @@ import { useEffect } from 'react';
 const mealPlanScreen = () => {
     const isFocused = useIsFocused()
 
+    //parse the data into a formatted data structure
     const setPlan = (result) => {
         let newPlan = []
-        days.forEach(aDay => {
+        days.forEach(aDay => {  //Add objects for each day into the meal plan.
             let item = {
                 day : aDay,
                 meals: []
             }
             newPlan.push(item)
         })
-        result.forEach(item => {
+        result.forEach(item => {    //Add the relevant meals for each day.
             newPlan.forEach(aPlan => {
                 if(aPlan.day == item.day){
                     aPlan.meals.push(item)
@@ -29,8 +30,7 @@ const mealPlanScreen = () => {
 
 
     useEffect(() => {
-        queryDays().then(function(result){setPlan(result)})
-
+        queryDays().then(function(result){setPlan(result)}) //Read from the database if the screen is focused.
     }, [isFocused])
     const navi = useNavigation();
 
@@ -42,7 +42,7 @@ const mealPlanScreen = () => {
     const [selectedDay, setSelectedDay] = useState(null);
 
     function mealDay(){
-        const renderFood = (food) => {
+        const renderFood = (food) => {  //return all foods for a specific day
             return plan.map(aDay => {
                 if(aDay.day == food.item.day){  //get the correct day
                     return aDay.meals.map(meal => {
@@ -51,17 +51,16 @@ const mealPlanScreen = () => {
                 }
             })
         }
-
-        
         return (   
             <View>
-                {/* <Button title='Update' onPress={() => {queryDays().then(function(result){setPlan(result)})}}/> */}
+                {/* This flat list will return all days and their meals */}
                 <FlatList 
                 data={plan}
                 extraData={plan}
                 keyExtractor={(item) => item.day}
                 renderItem={item => 
-                    <TouchableOpacity style={styles.item} onPress={() => {setSelectedDay(item.item.day); navi.navigate('Meals', {chosenDay: item})}}>
+                    // Clicking on the flat list item will navigate to the Meals screen for updating, adding and deleting meals.
+                    <TouchableOpacity style={styles.item} onPress={() => {setSelectedDay(item.item.day); navi.navigate('Meals', {chosenDay: item})}}> 
                         <Text style={styles.itemHeader}> {item.item.day} </Text>
                         {renderFood(item)}
                     </TouchableOpacity>
@@ -72,7 +71,6 @@ const mealPlanScreen = () => {
         
     return (
         <View style={{ paddingTop: 10, paddingHorizontal: 20, width: "100%", justifyContent:"center"}}>
-
             {loading ? <Text>Loading</Text> : mealDay()}
         </View>
     );

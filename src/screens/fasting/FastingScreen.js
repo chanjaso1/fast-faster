@@ -5,10 +5,8 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 
 import FlatButton from '../../../components/Button';
 import Timer from '../../../components/Timer';
-// import { TimePicker } from '../../../components/TimePicker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
-// import 'moment-timezone';
   
   
 
@@ -33,14 +31,9 @@ export default function fastingScreen() {
     };
   
     const handleConfirm = (newDate) => {
-        // 'Oct 9 2021 21:35:00'
-    //   console.warn("A date has been picked: ", newDate);
-    //   moment.locale('en');
-    //   moment.locale('en')
-      console.log(moment(newDate).format('MMM D YYYY H:mm:ss'))
-      setEndDate(moment(newDate).format('MMM D YYYY H:mm:ss'))
-      setStartDate(moment().format('MMM D YYYY H:mm:ss'))
-      turnTimerOn(true)
+      setEndDate(moment(newDate).format('MMM D YYYY H:mm:ss'))  //Format the target date.
+      setStartDate(moment().format('MMM D YYYY H:mm:ss'))       //Format the time when the timer started.
+      turnTimerOn(true)                                         //Start the timer.
       hideDatePicker();
       
     };
@@ -65,16 +58,8 @@ export default function fastingScreen() {
             
       
             <FlatButton text="Start" onPress={() => {showDatePicker()}}  />
-            {/* <FlatButton text="Start" onPress={() => {
-                turnTimerOn(timerOn => !timerOn)
-                setMounted(mounted => !mounted);
-                setModalContent("SetFastTime");
-                setVisible(true);
-                }}  /> */}
-            
-            
-            
             <FlatButton text="End" onPress={() => {turnTimerOn(false); setMounted(false)}}   />
+
             {/* based on: https://github.com/mmazzarolo/react-native-modal-datetime-picker */}
             <DateTimePickerModal
             isVisible={isDatePickerVisible}

@@ -18,6 +18,7 @@ import PersonalScreen from './src/screens/settings/PersonalScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
+//define the meal plan stack navigation
 function mealStackNavigator() {
     return (
         <Stack.Navigator initialRouteName = 'Meal Plans' screenOptions={{headerShown: false}}>
@@ -27,6 +28,7 @@ function mealStackNavigator() {
     )
 }
 
+//define the settings stack navigation
 function settingStackNavigator() {
     return (
         <Stack.Navigator initialRouteName = 'Your Settings' screenOptions={{headerShown: false}}>
@@ -47,7 +49,7 @@ function settingStackNavigator() {
         screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-    
+            //highlight icons if they are the focused route
             if(route.name == "Planning"){
                 iconName = focused ? "ios-list-circle" : "ios-list-circle-outline";
             }else if(route.name == "Fasting") {
@@ -63,7 +65,8 @@ function settingStackNavigator() {
         tabBarActiveTintColor:'black',
         })}
         >
-    
+        
+        {/* Define the screens with the component*/}
         <Tab.Screen name="Planning"  component={mealStackNavigator} options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Fasting" component={fastingScreen}  options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Statistics" component={statisticsScreen}  options={{headerTitleAlign : 'center'}}/>

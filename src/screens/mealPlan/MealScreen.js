@@ -4,12 +4,6 @@ import { useIsFocused } from '@react-navigation/native';
 import {deleteMeal, queryDay, updateMeal} from './../../database/Firebase'
 import ModalStyle from '../../styles/ModalStyle'
 import {AddPlan} from '../../../components/PopUp';
-import { YellowBox } from 'react-native';
-
-LogBox.ignoreLogs([
-  'Non-serializable values were found in the navigation state',
-]);
-
 
 export default function MealScreen(props) {
 
@@ -24,40 +18,40 @@ export default function MealScreen(props) {
 
   }, [isFocused])
 
-const handleTick = ((meal) => {
+// Called when the user checks and unchecks a box.
+const handleTick = ((meal) => {             //Find the meal.
   var newPlan = JSON.parse(JSON.stringify(plan))
   newPlan.map(aMeal => {
-      if(aMeal.timeToEat == meal.timeToEat) {
+      if(aMeal.timeToEat == meal.timeToEat) {//Check or uncheck.
           aMeal.checked = !aMeal.checked
-          updateMeal(aMeal)
+          updateMeal(aMeal)                 //Send the updated information to the database.
       }
   })
-  setPlan(newPlan)
+  setPlan(newPlan)                          //Update the state to re-render it.
 })
 
-const handleDelete = ((meal) => {
+//Called when a meal is deleted
+const handleDelete = ((meal) => {           //Recreate the plan without the meal.
   var newPlan = []
   plan.map(aMeal => {
-    if(aMeal.timeToEat != meal.timeToEat){
+    if(aMeal.timeToEat != meal.timeToEat){  
         newPlan.push(aMeal)
     }
   })
-  setPlan(newPlan)
-  deleteMeal(meal)
+  setPlan(newPlan)                          //Update the state to re-render it.
+  deleteMeal(meal)                          //Delete the meal from the database.
 })
 
 
-
+//Return a list of meals that contains its name, a checkbox and a delete button.
 const foodList = () => {
   try{
     return plan.map((meal) => {
       let key = `${meal.name}` + `${meal.timeToEat}`
       return(
           <View style={styles.container} key={key}>
-          <Text style={styles.text}>
-            {meal.name}
-          </Text>
-          <CheckBox style={ModalStyle.CheckBox, {paddingBottom:20}}
+          <Text style={styles.text}>{meal.name}</Text>
+          <CheckBox style={ModalStyle.CheckBox, {paddingBottom:20}} 
             value={meal.checked}
             onValueChange={() => {handleTick(meal)}}
           />
@@ -84,10 +78,6 @@ const foodList = () => {
   )
 }
 
-
-
-
-
   const styles = StyleSheet.create({
     container: {
       // flex: 1,
@@ -105,3 +95,7 @@ const foodList = () => {
       paddingLeft:10
     }
   })
+
+  LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);

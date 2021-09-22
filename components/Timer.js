@@ -58,7 +58,7 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                         }
                     }, update)
                 }else {
-                    console.log("aborted update on unmounted component");
+                    console.log("aborted update on unmounted component"); 
                 }
             }, 3000); //wait a few seconds before another attempt
         }
