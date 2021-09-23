@@ -86,6 +86,47 @@ export const getPerson = async () => {
 }
 
 //based on: https://firebase.google.com/docs/firestore/query-data/get-data
+export const getGallery = async () => {
+  items = []
+  try {
+  const aPerson = await dbh.collection("Gallery").get().then(
+    data => {
+      if(data.empty){
+        console.log("The data is empty")
+        return null
+      }else{
+        data.forEach(doc => {
+          let image = {
+            id: doc.id,
+            uri: doc.data().uri
+          }
+          console.log(image)
+          items.push(image)
+          
+        })
+      }
+    }
+  );
+  console.log('READING IMAGES. . . .')
+  return items
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//based on: https://firebase.google.com/docs/firestore/manage-data/add-data
+export const addImage = async (image) => {
+  try {
+    const newPlans = await dbh.collection("Gallery").add({//Add a new meal
+          uri: image.uri
+    })
+    console.log("WRITING IMAGE. . . .")
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//based on: https://firebase.google.com/docs/firestore/query-data/get-data
 export const queryDays = async () => {
   let items = []
   try {
@@ -123,7 +164,7 @@ export const addMeal = async (item) => {
           checked: item.checked,
           name: item.name
     })
-    console.log("WRITING . . . .")
+    console.log("WRITING MEAL. . . .")
   } catch (error) {
     console.log(error)
   }

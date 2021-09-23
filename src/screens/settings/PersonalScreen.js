@@ -9,10 +9,6 @@ const PersonalScreen = () => {
     useEffect(() => {
       getPerson().then(function(result) {
           setAll(result[0])
-          setName(result[0].name)
-          setHeight(result[0].height)
-          setWeight(result[0].weight)
-          setId(result[0].id)
         })
   
     }, [isFocused])
@@ -36,7 +32,7 @@ const PersonalScreen = () => {
                 },
                 { text: "OK",                       //Update personal information in the database
                     onPress: () => {            
-                    let person = {
+                    let person = {                  
                         name: name,
                         height: height,
                         weight: weight,

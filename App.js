@@ -4,15 +4,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
+//import screens
 import mealPlanScreen from './src/screens/mealPlan/MealPlanScreen';
 import fastingScreen from './src/screens/fasting/FastingScreen';
-import settingsScreen from './src/screens/settings/SettingScreen';
-import statisticsScreen from './src/screens/statistics/StatisticsScreen';
+import galleryScreen from './src/screens/gallery/GalleryScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import MealScreen from './src/screens/mealPlan/MealScreen';
 import NotificationsScreen from './src/screens/settings/NotificationsScreen';
 import PersonalScreen from './src/screens/settings/PersonalScreen';
- 
+import settingsScreen from './src/screens/settings/SettingScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -55,8 +55,8 @@ function settingStackNavigator() {
             iconName = focused ? "timer" : "timer-outline"; 
             }else if(route.name == "Settings") {
                 iconName = focused ? "settings" : "cog-outline"; 
-            }else if(route.name == "Statistics") {
-                iconName = focused ? "stats-chart" : "stats-chart-outline";
+            }else if(route.name == "Gallery") {
+                iconName = focused ? "copy" : "copy-outline";
             }
             return <Ionicons name={iconName} size={size} color={color}/>;
         },
@@ -68,7 +68,7 @@ function settingStackNavigator() {
         {/* Define the screens with the component*/}
         <Tab.Screen name="Planning"  component={mealStackNavigator} options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Fasting" component={fastingScreen}  options={{headerTitleAlign : 'center'}}/>
-        <Tab.Screen name="Statistics" component={statisticsScreen}  options={{headerTitleAlign : 'center'}}/>
+        <Tab.Screen name="Gallery" component={galleryScreen}  options={{headerTitleAlign : 'center'}}/>
         <Tab.Screen name="Settings" component={settingStackNavigator}  options={{headerTitleAlign : 'center'}}/>
     
   
