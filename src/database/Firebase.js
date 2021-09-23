@@ -213,3 +213,13 @@ export const deleteMeal = async (item) => {
   }
 }
 
+//based on: https://firebase.google.com/docs/firestore/manage-data/delete-data
+export const deleteImage = async (item) => {
+  try {
+    const newPlans = await dbh.collection("Gallery").doc(item.id).delete()
+    console.log("DELETING . . . .")
+  } catch (error) {
+    console.log(error)
+  }
+}
+
