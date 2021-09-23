@@ -91,8 +91,7 @@ export const addMeal = async (item) => {
           day: item.day,
           timeToEat: item.timeToEat,
           checked: item.checked,
-          name: item.name,
-          doc: doc.id
+          name: item.name
     })
     console.log("WRITING . . . .")
   } catch (error) {

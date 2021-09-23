@@ -72,7 +72,8 @@ const foodList = () => {
       </Modal>
 
       {foodList()}
-        <Button title='Add Plan' onPress={() => {setVisible(true); setModalContent('Add Plan')}}/>
+        <Button title='Add Plan' onPress={() => {setVisible(true); setModalContent('Add Plan'); 
+        }}/>
         <Button title='go back' onPress={() => {props.navigation.goBack()}}/>
     </View> 
   )
