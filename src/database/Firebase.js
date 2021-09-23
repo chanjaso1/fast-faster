@@ -56,6 +56,36 @@ export const queryDay = async (day) => {
 }
 
 //based on: https://firebase.google.com/docs/firestore/query-data/get-data
+export const getPerson = async () => {
+  items = []
+  try {
+  const aPerson = await dbh.collection("Personal").get().then(
+    data => {
+      if(data.empty){
+        console.log("The data is empty")
+        return null
+      }else{
+        data.forEach(doc => {
+          let person = {
+            id: doc.id,
+            name: doc.data().name,
+            height: doc.data().height,
+            weight: doc.data().weight
+          }
+          items.push(person)
+          
+        })
+      }
+    }
+  );
+  console.log('READING PERSON. . . .')
+  return items
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+//based on: https://firebase.google.com/docs/firestore/query-data/get-data
 export const queryDays = async () => {
   let items = []
   try {
@@ -99,6 +129,23 @@ export const addMeal = async (item) => {
   }
 }
 
+
+export const setPerson = async (person) => {
+  try {
+  const aPerson = await dbh.collection("Personal").doc(person.id).set({
+    name: person.name,
+    weight: person.weight,
+    height: person.height,
+    id: person.height,
+  });
+  console.log('UPDATING PERSON. . . .')
+  return items
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 //based on: https://firebase.google.com/docs/firestore/manage-data/add-data
 export const updateMeal = async (item) => {
   try {
@@ -124,3 +171,4 @@ export const deleteMeal = async (item) => {
     console.log(error)
   }
 }
+

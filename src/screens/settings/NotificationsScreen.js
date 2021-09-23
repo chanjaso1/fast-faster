@@ -98,7 +98,7 @@ styles = StyleSheet.create({
         paddingRight: 20,
         justifyContent: 'flex-start'
     },
-    // toggle : {
+    // toggle : {   
     //     alignItems: 'flex-end'
     // }
 })

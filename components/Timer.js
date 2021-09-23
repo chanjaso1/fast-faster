@@ -40,7 +40,7 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                         let minutes = Math.floor( (timeToFinish % (1000 * 3600)) / (1000 * 60)  );
                         let seconds = Math.floor( (timeToFinish % (1000 * 60)) / (1000));
             
-                        if(seconds != "NaN") {  //
+                        if(seconds != "NaN") {  
                             setProgressBar((100 * (1 - (timeToFinish)/(target - begin))))   //set the progress bar
                             let stringHours = hours < 10 ? `0${hours}` : hours 
                             let stringMinutes = minutes < 10 ? `0${minutes}` : minutes 
