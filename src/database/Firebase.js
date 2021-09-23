@@ -100,7 +100,6 @@ export const getGallery = async () => {
             id: doc.id,
             uri: doc.data().uri
           }
-          console.log(image)
           items.push(image)
           
         })

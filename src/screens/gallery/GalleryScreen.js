@@ -93,12 +93,8 @@ const galleryScreen = () => {
     const layout = () => {
       return gallery.map(image => {
           return (
-            // <TouchableOpacity key={image.uri} onPress={() => {deleteImage(alertDelete)}}>
               <Image key={image.id} source={{uri: image.uri}} style={{ width: "33%", height: "25%" } }/>
-            //  </TouchableOpacity>
-          
           );
-
       })
     }
 

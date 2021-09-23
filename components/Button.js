@@ -31,11 +31,11 @@ export function CancelButton({text, onPress}) {
     )
 }
 
-export function RoundButton({onPress}) {
+export function DeleteButton({onPress}) {
     return (
         <TouchableOpacity onPress={onPress}>
-        <View style={styles.roundButton}>
-           <Text style={styles.roundButtonText}>+</Text>
+        <View style={styles.deleteButton}>
+           <Text style={styles.deleteButtonText}>x</Text>
         </View>
     </TouchableOpacity>
     )
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         paddingHorizontal: 10,
         backgroundColor: '#74F588',
-        borderRadius:180/2,
+        borderRadius:90,
         elevation: 2
     },
     submitButton: {
@@ -61,14 +61,15 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         paddingHorizontal: 10,
         backgroundColor: '#74F588',
-        borderRadius:180/2,
+        borderRadius:90,
         elevation: 2
     },
-    roundButton: {
+    deleteButton: {
         width: 25,
         height: 25,
+        // left: 25,
         backgroundColor: '#C4C4C4',
-        borderRadius:180/2,
+        borderRadius:90,
         elevation: 2
     },
     cancelButton: {
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
         paddingVertical: 14,
         paddingHorizontal: 10,
         backgroundColor: '#DDDDDD',
-        borderRadius:180/2,
+        borderRadius:90,
         elevation: 2
     },
     buttonText: {
@@ -89,10 +90,11 @@ const styles = StyleSheet.create({
         fontSize: 22,
         textAlign: 'center'  
     },
-    roundButtonText: {
+    deleteButtonText: {
         color: '#6D6D6D',
         fontWeight: 'bold',
         textTransform: 'capitalize',
+        // left: 15,
         fontSize: 22,
         textAlign: 'center',
         marginTop: -2
