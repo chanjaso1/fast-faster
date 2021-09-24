@@ -1,4 +1,4 @@
-##My Fasting App
+My Fasting App
 
 The app is a react native project using expo. This project was developed on Visual Studio Code.
 
