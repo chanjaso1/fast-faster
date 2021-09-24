@@ -17,9 +17,6 @@ export default function fastingScreen() {
     const [endDate, setEndDate] = useState('')
     const [startDate, setStartDate] = useState('')
     
-
-    const [visible, setVisible] = useState(false);
-    const [modalContent, setModalContent] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const showDatePicker = () => {
@@ -43,7 +40,10 @@ export default function fastingScreen() {
 
     return (
         <View style={style.container}>
-            {timer == true ? <Timer target={endDate} start={startDate} isMounted={mounted} setProgressBar={setProgress}/> : null}
+            {/* Display the timer labels if turned on */}
+            {timer && mounted ? <Timer target={endDate} start={startDate} isMounted={mounted} setProgressBar={setProgress}/> : null}
+
+            {/* The progression bar */}
             <CircularProgress style={style.circle}
                 radius={150}
                 value={progress % 101}
@@ -57,7 +57,7 @@ export default function fastingScreen() {
             <StatusBar style='auto'/>
             
       
-            <FlatButton text="Start" onPress={() => {showDatePicker()}}  />
+            <FlatButton text="Start" onPress={() => {showDatePicker(); setMounted(true)}}  />
             <FlatButton text="End" onPress={() => {turnTimerOn(false); setMounted(false)}}   />
 
             {/* based on: https://github.com/mmazzarolo/react-native-modal-datetime-picker */}

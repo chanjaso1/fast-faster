@@ -58,7 +58,7 @@ const handleDelete = ((meal) => {           //Recreate the plan without the meal
     }
   })
   setPlan(newPlan)                          //Update the state to re-render it.
-  // deleteMeal(meal)                          //Delete the meal from the database.
+  deleteMeal(meal)                          //Delete the meal from the database.
 })
 
 

@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import ModalStyle from "../src/styles/ModalStyle";
 import {CancelButton, FlatButton} from './Button';
 import { SubmitButton } from './Button';
-import { addMeal, addToDB } from '../src/database/Firebase';
+import { addMeal } from '../src/database/Firebase';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 // import DatePicker from 'react-native-date-picker'
 
@@ -17,10 +17,6 @@ const style = StyleSheet.create({
 });
 
 
-
-export default function SetFastTime({setVisible,}) {
-    
-};
 
 export function AddPlan({setVisible, day}) {
     const [timeToEat, setTime] = useState('')
@@ -64,11 +60,10 @@ export function AddPlan({setVisible, day}) {
                 <Text style={{fontSize: 15, color: 'rgba(0,0,0,0.75)'}}>Eaten?</Text>
                 <CheckBox value={checked} onValueChange={() => {setChecked(!checked)}}/>
                 </View>
-                {/* <DatePicker date={date} onDateChange={setDate} /> */}
                 </View>
             </ScrollView>
                 <SubmitButton text='Done' onPress={() => {setVisible(false); handleSubmit(timeToEat, name, checked)}}/>
-                <CancelButton  text='cancel' onPress={() => {setVisible(false); addToDB()}} />
+                <CancelButton  text='cancel' onPress={() => {setVisible(false);}} />
         </View> 
     </View>
 

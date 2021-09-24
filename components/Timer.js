@@ -10,20 +10,19 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
     const [startDate, setStartDate] = useState('')
 
     useEffect  (() => {
+        if(!isMounted){
+            cleanUp()
+        }
         isMounted = true;
         setUpdate(1000)
         setEndDate(target)
         setStartDate(start)
         countDown()
         return() => {   //clean up states
-            setTitle('')
-            setTime('...')
-            setEndDate('')
-            setStartDate('')
-            setUpdate(9999999999999)
-            isMounted = false;
+            cleanUp()
         };
-
+        
+        //based on: https://www.youtube.com/watch?v=pjDFNUweDzs
         function countDown() {
             setTimeout(() => {
                 if(isMounted){
@@ -45,11 +44,14 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                             let stringHours = hours < 10 ? `0${hours}` : hours 
                             let stringMinutes = minutes < 10 ? `0${minutes}` : minutes 
                             let stringSeconds = seconds < 10 ? `0${seconds}` : seconds  
-
-                            setTime(`${stringHours}:${stringMinutes}:${stringSeconds}`); //set the time
+                            
+                            if(isMounted){
+                                setTime(`${stringHours}:${stringMinutes}:${stringSeconds}`); //set the time
+                            }
+                            
                         }
             
-                        if(timeToFinish < 0) {  //when the timer finishes
+                        if(timeToFinish < 0 && isMounted) {  //when the timer finishes
                             setTitle("You're done!");
                             setProgressBar(100)
                             setTime('');
@@ -57,13 +59,19 @@ const Timer = ({target, start,isMounted, setProgressBar}) => {
                             
                         }
                     }, update)
-                }else {
-                    console.log("aborted update on unmounted component"); 
                 }
             }, 3000); //wait a few seconds before another attempt
         }
     }, [endDate]);
 
+    function cleanUp(){
+        setTitle('')
+        setTime('...')
+        setEndDate('')
+        setStartDate('')
+        setUpdate(9999999999999)
+        isMounted = false;
+    }
 
     return (
         <View style={{justifyContent:'center', alignItems:'center'}}>

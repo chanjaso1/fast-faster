@@ -1,8 +1,6 @@
 import * as React from 'react';
-import { Text, View, Switch, Button, StyleSheet } from 'react-native';
-import { isEnabled } from 'react-native/Libraries/Performance/Systrace';
+import { Text, View, Switch, StyleSheet } from 'react-native';
 import { useState } from 'react/cjs/react.development';
-// import { Button } from 'react-native-paper';
 
 const NotificationsScreen = () => {
     const [all, setAll] = useState(false)
@@ -18,8 +16,8 @@ const NotificationsScreen = () => {
         setHalfway(!all)
     }
     
+    // Display all switches and text for each notification
     return (
-
         <View style={styles.container}>
         <View style={styles.row}>
             <Text style={styles.text}> Notifications</Text>

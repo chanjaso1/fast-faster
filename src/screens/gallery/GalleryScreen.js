@@ -5,23 +5,13 @@ import { useIsFocused } from '@react-navigation/native';
 import { addImage, deleteImage, getGallery, getPerson } from '../../database/Firebase';
 
 const galleryScreen = () => {
-    const [gallery, setGallery] = useState([]);
+    const [gallery, setGallery] = useState([])
     const isFocused = useIsFocused()
-
-    const [images,  setImages] = useState([{source: []}]);
-
 
     useEffect(() => {
       // getPerson()
 
       getGallery().then(function(result ) {
-        // // filePath: require(result.uri)
-        // result.map(image => {
-        //   let entry = {
-        //     id : require(image.uri)
-        //   }
-        //     images.source.push(entry)
-        // })
         setGallery(result)
       })
     }, [isFocused])
