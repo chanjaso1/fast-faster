@@ -4,7 +4,7 @@ import { View, StyleSheet} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
 import FlatButton from '../../../components/Button';
-import Timer from '../../../components/Timer';
+import Timer from './Timer'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
   

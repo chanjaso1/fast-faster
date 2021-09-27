@@ -48,10 +48,8 @@ export const queryDay = async (day) => {
         }
       }
     );
-    console.log('READING DAY. . . .')
     return items
     } catch (error) {
-      console.log(error)
     }
 }
 
@@ -78,10 +76,8 @@ export const getPerson = async () => {
       }
     }
   );
-  console.log('READING PERSON. . . .')
   return items
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -106,10 +102,8 @@ export const getGallery = async () => {
       }
     }
   );
-  console.log('READING IMAGES. . . .')
   return items
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -119,9 +113,7 @@ export const addImage = async (image) => {
     const newPlans = await dbh.collection("Gallery").add({//Add a new meal
           uri: image.uri
     })
-    console.log("WRITING IMAGE. . . .")
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -147,10 +139,8 @@ export const queryDays = async () => {
       }
     }
   );
-  console.log('READING DAYS. . . .')
   return items
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -163,9 +153,7 @@ export const addMeal = async (item) => {
           checked: item.checked,
           name: item.name
     })
-    console.log("WRITING MEAL. . . .")
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -178,10 +166,8 @@ export const setPerson = async (person) => {
     height: person.height,
     id: person.height,
   });
-  console.log('UPDATING PERSON. . . .')
   return items
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -196,9 +182,7 @@ export const updateMeal = async (item) => {
           name: item.name,
           doc: item.id
     })
-    console.log("UPDATING . . . .")
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -206,9 +190,7 @@ export const updateMeal = async (item) => {
 export const deleteMeal = async (item) => {
   try {
     const newPlans = await dbh.collection("Foods").doc(item.id).delete()
-    console.log("DELETING . . . .")
   } catch (error) {
-    console.log(error)
   }
 }
 
@@ -216,9 +198,7 @@ export const deleteMeal = async (item) => {
 export const deleteImage = async (item) => {
   try {
     const newPlans = await dbh.collection("Gallery").doc(item.id).delete()
-    console.log("DELETING . . . .")
   } catch (error) {
-    console.log(error)
   }
 }
 

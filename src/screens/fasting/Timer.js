@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, {useState, useEffect} from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 const Timer = ({target, start,isMounted, setProgressBar}) => {
