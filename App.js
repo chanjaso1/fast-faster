@@ -13,6 +13,9 @@ import MealScreen from './src/screens/mealPlan/MealScreen';
 import NotificationsScreen from './src/screens/settings/NotificationsScreen';
 import PersonalScreen from './src/screens/settings/PersonalScreen';
 import settingsScreen from './src/screens/settings/SettingScreen';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

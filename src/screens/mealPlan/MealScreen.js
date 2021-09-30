@@ -7,10 +7,11 @@ import {AddPlan} from '../../../components/PopUp';
 import { DeleteButton, SubmitButton, CancelButton } from '../../../components/Button';
 
 export default function MealScreen(props) {
-
+  const [currentDay, setCurrentDay] = useState(props.route.params.chosenDay.item.day)
+  
   const [visible, setVisible] = useState(false)
   const [modalContent, setModalContent] = useState('')
-  const [currentDay, setCurrentDay] = useState(props.route.params.chosenDay.item.day)
+ 
 
   const [plan, setPlan] = useState([])
   const isFocused = useIsFocused()
@@ -72,7 +73,7 @@ const foodList = () => {
           <Text style={styles.text}>{meal.name}</Text>
           <CheckBox style={ModalStyle.CheckBox, {paddingBottom:20}} 
             value={meal.checked}
-            onValueChange={() => {handleTick(meal)}}
+            onValueChange={() => {handleTick(meal)}}  
           />
           {/* <Button title='delete' onPress={handleDelete(meal)}/> */}
           <DeleteButton onPress={() => {alertDelete(meal)}}/>

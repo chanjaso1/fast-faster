@@ -32,6 +32,8 @@ const mealPlanScreen = () => {
     useEffect(() => {
         queryDays().then(function(result){setPlan(result)}) //Read from the database if the screen is focused.
     }, [isFocused])
+
+    
     const navi = useNavigation();
 
     const[loading, setLoading] = useState(false)
