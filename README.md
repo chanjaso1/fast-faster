@@ -2,8 +2,9 @@
 
 The app is a react native project using expo. This project was developed on Visual Studio Code.
 
+**1. Ensure that Node.js downloaded with Version 12 or higher.**
 
-**Ensure that the expo client is installed.**  
+**2. Ensure that the expo client is installed.**  
 npm install --global expo-cli
 
 
@@ -15,7 +16,11 @@ API: 28
 Target: Android 9.0 (Google APIs)  
 CPU/ABI: x86  
 
-**Starting the development server:**
+**3. Clone this repository**
+Clone with HTTPS: https://gitlab.ecs.vuw.ac.nz/course-work/swen325/2021/assignment2/chanjaso1/assignment2.git
+Clone with SSH:   git@gitlab.ecs.vuw.ac.nz:course-work/swen325/2021/assignment2/chanjaso1/assignment2.git
+
+**4. Starting the development server:**
 1. Ensure that an android emulator is already running from the Android Virtual Device Manager on Android Studio.
 1. expo start
 2. When the page has loaded, click on Run on android device/emulator
